@@ -1,25 +1,28 @@
-import { useState, type RefObject, useEffect } from "react"
+import { useState, type RefObject, useEffect } from "react";
 
 interface Props {
-  cursor: { x: number; y: number }
-  cardRef: RefObject<HTMLElement>
-  mouseOnCard: boolean
+  cursor: { x: number; y: number };
+  cardRef: RefObject<HTMLElement>;
+  mouseOnCard: boolean;
 }
 
 const Flame = ({ cursor, cardRef, mouseOnCard }: Props) => {
-  const [gradientCenter, setGradientCenter] = useState({ cx: "50%", cy: "50%" })
+  const [gradientCenter, setGradientCenter] = useState({
+    cx: "50%",
+    cy: "50%",
+  });
 
   useEffect(() => {
     if (cardRef.current && cursor.x !== null && cursor.y !== null) {
-      const cardRect = cardRef.current.getBoundingClientRect()
-      const cxPercentage = (cursor.x / cardRect.width) * 100 - 24
-      const cyPercentage = (cursor.y / cardRect.height) * 100
+      const cardRect = cardRef.current.getBoundingClientRect();
+      const cxPercentage = (cursor.x / cardRect.width) * 100 - 24;
+      const cyPercentage = (cursor.y / cardRect.height) * 100;
       setGradientCenter({
         cx: `${cxPercentage}%`,
         cy: `${cyPercentage}%`,
-      })
+      });
     }
-  }, [cursor, cardRef])
+  }, [cursor, cardRef]);
 
   return (
     <svg
@@ -54,7 +57,7 @@ const Flame = ({ cursor, cardRef, mouseOnCard }: Props) => {
         d="M12 18a3.75 3.75 0 0 0 .495-7.468 5.99 5.99 0 0 0-1.925 3.547 5.975 5.975 0 0 1-2.133-1.001A3.75 3.75 0 0 0 12 18Z"
       />
     </svg>
-  )
-}
+  );
+};
 
-export default Flame
+export default Flame;
